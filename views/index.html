@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>My Awesome Site</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <style>
+        	.active,.active a  {color:red;}
+			#header {background: SkyBlue;}
+			.news_div {border: solid 1px; margin:5px;}
+        </style>
+</head>
+<body>
+	<div id="header">
+	{# В таких скобках идет комментарий не выдамаемый пользователю #}
+	<h1><a href=/>Шапка сайта</a></h1>
+	<ul class="nav navbar-nav">
+		{# тут идет проверка текущей страницы и подстветка #}
+	            <li{% if active == 'home' %} class="active"{% endif %}><a href="{{ path('home') }}">Home</a></li>
+	            <li{% if active == 'about' %} class="active"{% endif %}><a href="{{ path('about') }}">About</a></li>
+	            <li{% if active == 'contact' %} class="active"{% endif %}><a href="{{ path('contact') }}">Contact</a></li>
+	</ul>
+	</div>
+	<br />
+	
+	{# Дальше идет заменяемый блок #}
+	{% block content %}
+
+	Главная  страница топорного сайта... Бла бла бла.. поцелуй мой блестящий металлический 3@д
+
+	<h2> Новости </h2>
+
+		{% for i in 0..2 %}
+    	<div class="news_div">
+    	<h3>Пример новости № {{i}}</h3>
+    	<img width=300px src=/img/news/{{i}}.jpg>
+    	<p>Текст текст текст</p>
+		</div>
+		{% endfor %}
+	
+	{% endblock %}
+
+	<br />
+	<br />
+	<hr>
+	Неизменяемый подвальчик
+	{# а тут мы подключаем глобальную переменную year инициализированную в index.php #}
+		<br />(c) курсы по вебу {{ year }}
+
+	</body>
+</html>
